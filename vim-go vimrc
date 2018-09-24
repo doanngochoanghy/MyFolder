@@ -28,6 +28,7 @@ set autoindent smartindent
 set cursorline
 set wildmenu showcmd showmatch
 set incsearch 
+let mapleader = " "
 
 "save and quit file
 nmap <leader>q :q<CR>
