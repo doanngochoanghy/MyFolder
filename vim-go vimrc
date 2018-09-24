@@ -35,6 +35,13 @@ nmap <leader>w :w<CR>
 vmap <leader>q <Esc><leader>qgv
 vmap <leader>w <Esc><leader>wgv
 
+" Tab navigation 
+nnoremap tk :tabnext<CR>
+nnoremap tj :tabprev<CR>
+nnoremap th :tabfirst<CR>
+nnoremap tl :tablast<CR>
+nnoremap tn :tabnew<CR>
+nnoremap tm :tabmove<Space>
 
 let g:go_version_warning = 0
 let g:neocomplete#enable_at_startup = 1
