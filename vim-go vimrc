@@ -43,6 +43,8 @@ nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 nnoremap tn :tabnew<CR>
 nnoremap tm :tabmove<Space>
+nnoremap tc :tabclose<CR>
+nnoremap te :tabedit<Space>
 
 let g:go_version_warning = 0
 let g:neocomplete#enable_at_startup = 1
