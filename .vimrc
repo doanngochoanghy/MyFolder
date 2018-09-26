@@ -51,6 +51,7 @@ vmap <leader>w <Esc><leader>wgv
 "NERDTree navigation
 nmap <leader>n :NERDTreeToggle<CR>
 vmap <leader>n <Esc><leader>ngv
+let g:NERDTreeWinSize =20
 
 "tab navigation
 nmap tn :tabnew<CR>
