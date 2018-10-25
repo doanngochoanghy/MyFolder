@@ -11,8 +11,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'SirVer/ultisnips'
-Plugin 'Shougo/neocomplete.vim'
+" Plugin 'Shougo/neocomplete.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'auto-pairs'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'fatih/molokai'
@@ -35,13 +37,17 @@ set wildmenu showcmd showmatch
 set incsearch
 set background=light
 set t_Co=256
-set autowrite
 
 "recursive fuzzy find
 set path +=**
 
 "lightline setup
 set laststatus=2
+
+" snippet for YCM
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 "save,edit and quit file
 nmap <leader>q :q<CR>
@@ -91,7 +97,6 @@ filetype plugin indent on
 syntax on
 
 " vim-go improvements
-set autowrite
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
@@ -103,9 +108,9 @@ autocmd FileType go nmap <Leader>i <Plug>(go-info)
 let g:go_list_type = "quickfix"
 let g:go_test_timeout = '10s'
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_fmt_command = "goimports"
+" let g:go_fmt_command = "goimports"
 let g:go_info_mode = 'gocode' 
-let g:go_updatetime = 100
+" let g:go_updatetime = 100
 
 " let g:go_metalinter_autosave = 1
 " let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
@@ -115,22 +120,30 @@ let g:go_updatetime = 100
  " Use smartcase.
  let g:neocomplete#enable_smart_case = 1
  " Set minimum syntax keyword length.
- let g:neocomplete#sources#syntax#min_keyword_length = 3
+"  let g:neocomplete#sources#syntax#min_keyword_length = 3
 
- " Plugin key-mappings.
- inoremap <expr><C-g>     neocomplete#undo_completion()
- inoremap <expr><C-l>     neocomplete#complete_common_string()
+"  " Plugin key-mappings.
+"  inoremap <expr><C-g>     neocomplete#undo_completion()
+"  inoremap <expr><C-l>     neocomplete#complete_common_string()
+"
+"  " Recommended key-mappings.
+"  " <CR>: close popup and save indent.
+"  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"  function! s:my_cr_function()
+"      return neocomplete#close_popup() . "\<CR>"
+"  endfunction
+"  " <TAB>: completion.
+"  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"  " <C-h>, <BS>: close popup and delete backword char.
+"  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"  inoremap <expr><C-y>  neocomplete#close_popup()
+"  inoremap <expr><C-e>  neocomplete#cancel_popup()
 
- " Recommended key-mappings.
- " <CR>: close popup and save indent.
- inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
- function! s:my_cr_function()
-     return neocomplete#close_popup() . "\<CR>"
- endfunction
- " <TAB>: completion.
- inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
- " <C-h>, <BS>: close popup and delete backword char.
- inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
- inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
- inoremap <expr><C-y>  neocomplete#close_popup()
- inoremap <expr><C-e>  neocomplete#cancel_popup()
+ " Go related mappings
+ " au FileType go nmap <Leader>i <Plug>(go-info)
+ " au FileType go nmap <Leader>gd <Plug>(go-doc)
+ " au FileType go nmap <Leader>r <Plug>(go-run)
+ " au FileType go nmap <Leader>b <Plug>(go-build)
+ " au FileType go nmap <Leader>t <Plug>(go-test)
+ " au FileType go nmap gd <Plug>(go-def-tab)
