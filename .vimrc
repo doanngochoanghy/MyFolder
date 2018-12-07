@@ -1,4 +1,20 @@
 let mapleader = " "
+
+autocmd! bufwritepost .vimrc source %
+" set mouse=a
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
+set tw=79   " width of document (used by gd)
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -13,15 +29,21 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'SirVer/ultisnips'
-" Plugin 'Shougo/neocomplete.vim'
+Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'auto-pairs'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'fatih/molokai'
 Plugin 'scrooloose/nerdtree'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'Chiel92/vim-autoformat'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -99,17 +121,17 @@ syntax on
 " vim-go improvements
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
+nnoremap <Leader>a :cclose<CR>:lclose<CR>
+autocmd FileType go nmap <Leader>b  <Plug>(go-build)
+autocmd FileType go nmap <Leader>r  <Plug>(go-run)
+autocmd FileType go nmap <Leader>t  <Plug>(go-test)
 autocmd FileType go nmap <Leader>c	<Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>i <Plug>(go-info)
 let g:go_list_type = "quickfix"
 let g:go_test_timeout = '10s'
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 " let g:go_fmt_command = "goimports"
-let g:go_info_mode = 'gocode' 
+let g:go_info_mode = 'guru' 
 " let g:go_updatetime = 100
 
 " let g:go_metalinter_autosave = 1
@@ -119,31 +141,21 @@ let g:go_info_mode = 'gocode'
  let g:neocomplete#enable_at_startup = 1
  " Use smartcase.
  let g:neocomplete#enable_smart_case = 1
- " Set minimum syntax keyword length.
-"  let g:neocomplete#sources#syntax#min_keyword_length = 3
+ set completeopt-=preview
+" let g:ale_fixers = {'python': ['black', 'isort', 'autopep8', 'yapf']}
+" let g:ale_fix_on_save = 1
+" let g:ale_completion_enabled = 1
+let g:pymode_rope_goto_definition_bind = 'gd'
+let g:pymode_trim_whitespaces = 1
+let g:pymode_lint_on_write = 1
+let g:python_highlight_all=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-"  " Plugin key-mappings.
-"  inoremap <expr><C-g>     neocomplete#undo_completion()
-"  inoremap <expr><C-l>     neocomplete#complete_common_string()
-"
-"  " Recommended key-mappings.
-"  " <CR>: close popup and save indent.
-"  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"  function! s:my_cr_function()
-"      return neocomplete#close_popup() . "\<CR>"
-"  endfunction
-"  " <TAB>: completion.
-"  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"  " <C-h>, <BS>: close popup and delete backword char.
-"  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-"  inoremap <expr><C-y>  neocomplete#close_popup()
-"  inoremap <expr><C-e>  neocomplete#cancel_popup()
-
- " Go related mappings
- " au FileType go nmap <Leader>i <Plug>(go-info)
- " au FileType go nmap <Leader>gd <Plug>(go-doc)
- " au FileType go nmap <Leader>r <Plug>(go-run)
- " au FileType go nmap <Leader>b <Plug>(go-build)
- " au FileType go nmap <Leader>t <Plug>(go-test)
- " au FileType go nmap gd <Plug>(go-def-tab)
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+autocmd FileType python nnoremap <Leader>= :Autoformat<CR>:w<CR>
+let g:autoformat_autoindent = 1
