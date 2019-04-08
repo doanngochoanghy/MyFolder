@@ -59,7 +59,6 @@ completions=(
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
   general
-  example
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -107,3 +106,13 @@ alias jn="nohup jupyter notebook &"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+# alias bashconfig="mate ~/.bashrc"
+# alias ohmybash="mate ~/.oh-my-bash"
+
+no_proxy=localhost,visc.com,viettel.com,viettel.com.vn,sirc.com
+
+alias gp='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard &&git push'
+alias gitlab='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard'
+force_color_prompt=yes
+alias ls='ls --color=always -G'
+alias 0='cd'
