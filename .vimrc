@@ -11,6 +11,8 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
+vnoremap <C-c> "+y
+map <C-v> "+P
 set tw=79   " width of document (used by gd)
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
