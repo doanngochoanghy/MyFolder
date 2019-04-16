@@ -1,7 +1,7 @@
 let mapleader = " "
 
 autocmd! bufwritepost .vimrc source %
-" set mouse=a
+set mouse=a
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
@@ -9,6 +9,8 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+map gst :Gstatus<CR>
+map gd :Gread<CR>
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 vnoremap <C-c> "+y
@@ -28,22 +30,24 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'fatih/vim-go'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+" Plugin 'fatih/vim-go'
+" Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'auto-pairs'
-Plugin 'AndrewRadev/splitjoin.vim'
+" Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'fatih/molokai'
 Plugin 'scrooloose/nerdtree'
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ervandew/supertab'
 
 
 " All of your Plugins must be added before the following line
@@ -54,7 +58,7 @@ filetype plugin indent on    " required
 "
 syntax on
 set relativenumber number
-set tabstop=4 smarttab softtabstop=4 shiftwidth=4
+set tabstop=8 expandtab shiftwidth=4 softtabstop=4
 set autoindent smartindent
 set cursorline
 set wildmenu showcmd showmatch
@@ -98,17 +102,17 @@ nmap te :tabedit<Space>
 
 let g:go_version_warning = 0
 let g:neocomplete#enable_at_startup = 1
-syntax enable  
+syntax enable
 let g:go_disable_autoinstall = 0
 
 " Highlight
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
-let g:go_highlight_build_constraints = 1 
+let g:go_highlight_build_constraints = 1
 let g:go_highlight_function_calls = 1
 let g:go_textobj_include_function_doc = 1
 
@@ -121,19 +125,19 @@ filetype plugin indent on
 syntax on
 
 " vim-go improvements
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <Leader>a :cclose<CR>:lclose<CR>
-autocmd FileType go nmap <Leader>b  <Plug>(go-build)
-autocmd FileType go nmap <Leader>r  <Plug>(go-run)
-autocmd FileType go nmap <Leader>t  <Plug>(go-test)
-autocmd FileType go nmap <Leader>c	<Plug>(go-coverage-toggle)
-autocmd FileType go nmap <Leader>i <Plug>(go-info)
+" map <C-n> :cnext<CR>
+" map <C-m> :cprevious<CR>
+" nnoremap <Leader>a :cclose<CR>:lclose<CR>
+" autocmd FileType go nmap <Leader>b  <Plug>(go-build)
+" autocmd FileType go nmap <Leader>r  <Plug>(go-run)
+" autocmd FileType go nmap <Leader>t  <Plug>(go-test)
+" autocmd FileType go nmap <Leader>c      <Plug>(go-coverage-toggle)
+" autocmd FileType go nmap <Leader>i <Plug>(go-info)
 let g:go_list_type = "quickfix"
 let g:go_test_timeout = '10s'
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 " let g:go_fmt_command = "goimports"
-let g:go_info_mode = 'guru' 
+let g:go_info_mode = 'guru'
 " let g:go_updatetime = 100
 
 " let g:go_metalinter_autosave = 1
@@ -152,7 +156,7 @@ let g:pymode_trim_whitespaces = 1
 let g:pymode_lint_on_write = 1
 let g:python_highlight_all=1
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
@@ -160,4 +164,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 autocmd FileType python nnoremap <Leader>= :Autoformat<CR>:w<CR>
-let g:autoformat_autoindent = 1
+let g:autoformat_autoindent = 0
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
