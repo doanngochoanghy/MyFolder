@@ -10,12 +10,14 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 map gst :Gstatus<CR>
-map gd :Gread<CR>
+map gd :Gdiff<CR>
+map gcm :Gcommit<CR>
+map ; :
+vnoremap <C-c> "+y
+" nmap <C-V> "+P
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
-vnoremap <C-c> "+y
-map <C-v> "+P
-set tw=79   " width of document (used by gd)
+" set tw=79   " width of document (used by gd)
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
 
@@ -62,8 +64,9 @@ set tabstop=8 expandtab shiftwidth=4 softtabstop=4
 set autoindent smartindent
 set cursorline
 set wildmenu showcmd showmatch
-set incsearch
-set background=light
+set incsearch hlsearch
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+set background=dark
 set t_Co=256
 
 "recursive fuzzy find
@@ -73,9 +76,9 @@ set path +=**
 set laststatus=2
 
 " snippet for YCM
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+" let g:UltiSnipsExpandTrigger="<c-k>"
+" let g:UltiSnipsJumpForwardTrigger="<c-n>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 "save,edit and quit file
 nmap <leader>q :q<CR>
@@ -95,6 +98,7 @@ vmap <leader>n <Esc><leader>ngv
 nmap tn :tabnew<CR>
 nmap tj :tabprevious<CR>
 nmap tk :tabnext<CR>
+nmap <C-t> :tabnext<CR>
 nmap th :tabfirst<CR>
 nmap tl :tablast<CR>
 nmap tm :tabmove<Space>
