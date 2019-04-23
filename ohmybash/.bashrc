@@ -1,5 +1,5 @@
 # Path to your oh-my-bash installation.
-export OSH=/home/ngochoang/.oh-my-bash
+export OSH=/home/qqq/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -13,13 +13,13 @@ CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_OSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -28,7 +28,7 @@ CASE_SENSITIVE="true"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -98,21 +98,18 @@ source $OSH/oh-my-bash.sh
 #
 # Example aliases
 alias bashconfig="vim ~/.bashrc"
+alias vimconfig="vim ~/.vimrc"
 alias ohmybash="vim ~/.oh-my-bash"
-alias myfolder="cd ~/MyFolder"
-alias datn="cd ~/datn"
-alias jn="nohup jupyter notebook &"
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
-# alias bashconfig="mate ~/.bashrc"
-# alias ohmybash="mate ~/.oh-my-bash"
 
 no_proxy=localhost,visc.com,viettel.com,viettel.com.vn,sirc.com
 
 alias gp='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard &&git push'
+alias gf='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard &&git fetch'
 alias gitlab='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard'
 force_color_prompt=yes
 alias ls='ls --color=always -G'
 alias 0='cd'
+alias portal='cd ~/Document/portal'
+alias datn='cd ~/Document/datn'
+alias myfolder='cd ~/Document/MyFolder'
+alias jn='nohup jupyter notebook &'
