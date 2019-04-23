@@ -103,13 +103,11 @@ alias ohmybash="vim ~/.oh-my-bash"
 
 no_proxy=localhost,visc.com,viettel.com,viettel.com.vn,sirc.com
 
-alias gp='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard &&git push'
-alias gf='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard &&git fetch'
-alias gitlab='echo N1AsrLtEyE9mt7nQwz6o| xclip -selection clipboard'
 force_color_prompt=yes
 alias ls='ls --color=always -G'
 alias 0='cd'
 alias portal='cd ~/Document/portal'
 alias datn='cd ~/Document/datn'
 alias myfolder='cd ~/Document/MyFolder'
+alias cluster='cd ~/Documents/clustering-request'
 alias jn='nohup jupyter notebook &'
