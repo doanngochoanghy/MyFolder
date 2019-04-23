@@ -29,25 +29,25 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Plugin 'AndrewRadev/splitjoin.vim'
+" Plugin 'Valloric/YouCompleteMe'
 " Plugin 'fatih/vim-go'
 " Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'auto-pairs'
-" Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'fatih/molokai'
-Plugin 'scrooloose/nerdtree'
 " Plugin 'vim-syntastic/syntastic'
-Plugin 'itchyny/lightline.vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'tpope/vim-fugitive'
+Plugin 'SirVer/ultisnips'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'auto-pairs'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
+Plugin 'fatih/molokai'
+Plugin 'honza/vim-snippets'
+Plugin 'itchyny/lightline.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 
 
 " All of your Plugins must be added before the following line
