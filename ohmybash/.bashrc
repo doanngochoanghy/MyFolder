@@ -111,3 +111,5 @@ alias datn='cd ~/Document/datn'
 alias myfolder='cd ~/Document/MyFolder'
 alias cluster='cd ~/Documents/clustering-request'
 alias jn='nohup jupyter notebook &'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
