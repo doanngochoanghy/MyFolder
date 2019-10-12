@@ -10,14 +10,13 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 map gst :Gstatus<CR>
-map gd :Gdiff<CR>
+map gd :Gdiffsplit HEAD<CR>
+map gw :Gwrite<CR>
 map gcm :Gcommit<CR>
-map ; :
-vnoremap <C-c> "+y
-" nmap <C-V> "+P
+map gp :Gpush<CR>
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
-" set tw=79   " width of document (used by gd)
+vnoremap <C-c> "+y
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
 
@@ -60,13 +59,12 @@ filetype plugin indent on    " required
 "
 syntax on
 set relativenumber number
-set tabstop=8 expandtab shiftwidth=4 softtabstop=4
+set tabstop=4 smarttab softtabstop=4 shiftwidth=4
 set autoindent smartindent
 set cursorline
 set wildmenu showcmd showmatch
-set incsearch hlsearch
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-set background=dark
+set incsearch
+set background=light
 set t_Co=256
 
 "recursive fuzzy find
@@ -74,9 +72,10 @@ set path +=**
 
 "lightline setup
 set laststatus=2
+let NERDTreeWinSize = 22
 
 " snippet for YCM
-" let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<c-k>"
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
@@ -91,32 +90,34 @@ vmap <leader>e <Esc><leader>e
 vmap <leader>w <Esc><leader>wgv
 
 "NERDTree navigation
-nmap <leader>n :NERDTreeToggle<CR>
-vmap <leader>n <Esc><leader>ngv
+nmap <leader>p :NERDTreeToggle<CR>
+vmap <leader>p <Esc><leader>ngv
 
 "tab navigation
 nmap tn :tabnew<CR>
 nmap tj :tabprevious<CR>
 nmap tk :tabnext<CR>
-nmap <C-t> :tabnext<CR>
+nmap tt :tabnext<CR>
 nmap th :tabfirst<CR>
 nmap tl :tablast<CR>
 nmap tm :tabmove<Space>
 nmap te :tabedit<Space>
+nmap <leader>t :!pytest -vs<CR>
+nmap <leader>T :!pytest -vs %<CR>
 
 let g:go_version_warning = 0
 let g:neocomplete#enable_at_startup = 1
-syntax enable
+syntax enable  
 let g:go_disable_autoinstall = 0
 
 " Highlight
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
-let g:go_highlight_build_constraints = 1
+let g:go_highlight_build_constraints = 1 
 let g:go_highlight_function_calls = 1
 let g:go_textobj_include_function_doc = 1
 
@@ -129,19 +130,19 @@ filetype plugin indent on
 syntax on
 
 " vim-go improvements
-" map <C-n> :cnext<CR>
-" map <C-m> :cprevious<CR>
-" nnoremap <Leader>a :cclose<CR>:lclose<CR>
-" autocmd FileType go nmap <Leader>b  <Plug>(go-build)
-" autocmd FileType go nmap <Leader>r  <Plug>(go-run)
-" autocmd FileType go nmap <Leader>t  <Plug>(go-test)
-" autocmd FileType go nmap <Leader>c      <Plug>(go-coverage-toggle)
-" autocmd FileType go nmap <Leader>i <Plug>(go-info)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <Leader>a :cclose<CR>:lclose<CR>
+autocmd FileType go nmap <Leader>b  <Plug>(go-build)
+autocmd FileType go nmap <Leader>r  <Plug>(go-run)
+autocmd FileType go nmap <Leader>t  <Plug>(go-test)
+autocmd FileType go nmap <Leader>c	<Plug>(go-coverage-toggle)
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
 let g:go_list_type = "quickfix"
 let g:go_test_timeout = '10s'
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 " let g:go_fmt_command = "goimports"
-let g:go_info_mode = 'guru'
+let g:go_info_mode = 'guru' 
 " let g:go_updatetime = 100
 
 " let g:go_metalinter_autosave = 1
@@ -156,18 +157,21 @@ let g:go_info_mode = 'guru'
 " let g:ale_fix_on_save = 1
 " let g:ale_completion_enabled = 1
 let g:pymode_rope_goto_definition_bind = 'gd'
-let g:pymode_trim_whitespaces = 1
-let g:pymode_lint_on_write = 1
+let g:pymode_trim_hitespaces = 1
+let g:pymode_lint__write = 1
 let g:python_highlight_all=1
 set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" set statusline+=%{Fugitivetatusline()}
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 autocmd FileType python nnoremap <Leader>= :Autoformat<CR>:w<CR>
-let g:autoformat_autoindent = 0
+let g:autoformat_autoindent = 1
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = 'env\|htmlcov'
+set complete-=i
 
-let g:SuperTabDefaultCompletionType = "<c-n>"
