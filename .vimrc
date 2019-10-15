@@ -35,23 +35,27 @@ call vundle#begin()
 " Plugin 'fatih/vim-go'
 " Plugin 'nsf/gocode', {'rtp': 'vim/'}
 " Plugin 'vim-syntastic/syntastic'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'SirVer/ultisnips'
+" Plugin 'Chiel92/vim-autoformat'
+" Plugin 'SirVer/ultisnips'
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'auto-pairs'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/molokai'
-Plugin 'honza/vim-snippets'
+" Plugin 'honza/vim-snippets'
 Plugin 'itchyny/lightline.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-
-
+Plugin 'auto-pairs'
+Plugin 'dense-analysis/ale'
+Plugin 'autozimu/LanguageClient-neovim'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 " All of your Plugins must be added before the following line
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -75,7 +79,7 @@ set laststatus=2
 let NERDTreeWinSize = 22
 
 " snippet for YCM
-let g:UltiSnipsExpandTrigger="<c-k>"
+" let g:UltiSnipsExpandTrigger="<c-k>"
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
@@ -153,9 +157,16 @@ let g:go_info_mode = 'guru'
  " Use smartcase.
  let g:neocomplete#enable_smart_case = 1
  set completeopt-=preview
-" let g:ale_fixers = {'python': ['black', 'isort', 'autopep8', 'yapf']}
-" let g:ale_fix_on_save = 1
-" let g:ale_completion_enabled = 1
+
+let g:ale_fixers = {'python': [ 'autopep8','black', 'isort', 'yapf']}
+let g:ale_fix_on_save = 1
+let g:ale_linters_explicit = 1
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+
 let g:pymode_rope_goto_definition_bind = 'gd'
 let g:pymode_trim_hitespaces = 1
 let g:pymode_lint__write = 1
@@ -174,4 +185,22 @@ let g:autoformat_autoindent = 1
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = 'env\|htmlcov'
 set complete-=i
+
+"""Settings LanguageClientServer
+set hidden
+
+let g:LanguageClient_serverCommands = {'python' : ['pyls', '-v']}
+source /home/ngochoang/.vim/bundle/LanguageClient-neovim/plugin/LanguageClient.vim
+set rtp+=~/.vim/bundle/LanguageClient-neovim
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+
+""" Settings deoplete
+let g:deoplete#enable_at_startup = 1 "pip3 install --user pynvim"
+
+""" Settings supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
