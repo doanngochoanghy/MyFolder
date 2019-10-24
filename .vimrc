@@ -10,7 +10,7 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 map gst :Gstatus<CR>
-map gd :Gdiffsplit HEAD<CR>
+map gd :Gvdiffsplit<CR>
 map gw :Gwrite<CR>
 map gcm :Gcommit<CR>
 map gp :Gpush<CR>
@@ -110,9 +110,10 @@ nmap <leader>t :!pytest -vs<CR>
 nmap <leader>T :!pytest -vs %<CR>
 
 let g:go_version_warning = 0
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 syntax enable  
 let g:go_disable_autoinstall = 0
+let g:jedi#completions_enabled = 0
 
 " Highlight
 let g:go_highlight_functions = 1  
@@ -158,23 +159,32 @@ let g:go_info_mode = 'guru'
  let g:neocomplete#enable_smart_case = 1
  set completeopt-=preview
 
-let g:ale_fixers = {'python': [ 'autopep8','black', 'isort', 'yapf']}
+let g:ale_fixers = {'python': [ 'yapf', 'autopep8','black', 'isort']}
+let g:ale_linters = {'python': ['pyls']}
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
-let g:ale_completion_enabled = 1
+let g:ale_linters_explicit = 0
+let g:ale_completion_enabled = 0
 let g:ale_sign_column_always = 1
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+" let g:ale_set_loclist = 1
+" let g:ale_set_quickfix = 0
+let g:ale_python_auto_pipenv = 1
+let g:ale_python_pylint_auto_pipenv = 1
+let g:ale_python_pycodestyle_auto_pipenv = 1
+let g:ale_completion_max_suggestions = 20
+let g:ale_change_sign_column_color = 1
+
+""" setup pylint_venv
+" pip install pylint-venv
+" Create file ~/.pylintrc
+" init-hook="
+"     from pylint_venv import inithook
+"     inithook()"
+" 
+" 
 
 
-let g:pymode_rope_goto_definition_bind = 'gd'
-let g:pymode_trim_hitespaces = 1
-let g:pymode_lint__write = 1
-let g:python_highlight_all=1
 set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-" set statusline+=%{Fugitivetatusline()}
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -187,15 +197,18 @@ let g:ctrlp_custom_ignore = 'env\|htmlcov'
 set complete-=i
 
 """Settings LanguageClientServer
-set hidden
+""" sudo pip install python-language-server
+" set hidden
 
-let g:LanguageClient_serverCommands = {'python' : ['pyls', '-v']}
+let g:LanguageClient_serverCommands = {'python' : ['pyls']}
 source /home/ngochoang/.vim/bundle/LanguageClient-neovim/plugin/LanguageClient.vim
 set rtp+=~/.vim/bundle/LanguageClient-neovim
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <Leader>d :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <Leader>n :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_selectionUI  = "quickfix"
 
 
 """ Settings deoplete
