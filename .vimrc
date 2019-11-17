@@ -20,6 +20,14 @@ vnoremap <C-c> "+y
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
 
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -30,18 +38,10 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-" Plugin 'AndrewRadev/splitjoin.vim'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'fatih/vim-go'
-" Plugin 'nsf/gocode', {'rtp': 'vim/'}
-" Plugin 'vim-syntastic/syntastic'
-" Plugin 'Chiel92/vim-autoformat'
-" Plugin 'SirVer/ultisnips'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/molokai'
-" Plugin 'honza/vim-snippets'
 Plugin 'itchyny/lightline.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
@@ -54,6 +54,8 @@ Plugin 'autozimu/LanguageClient-neovim'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'benmills/vimux'
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
@@ -78,11 +80,6 @@ set path +=**
 set laststatus=2
 let NERDTreeWinSize = 22
 
-" snippet for YCM
-" let g:UltiSnipsExpandTrigger="<c-k>"
-" let g:UltiSnipsJumpForwardTrigger="<c-n>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-
 "save,edit and quit file
 nmap <leader>q :q<CR>
 nmap <leader>Q :q!<CR>
@@ -105,9 +102,14 @@ nmap tt :tabnext<CR>
 nmap th :tabfirst<CR>
 nmap tl :tablast<CR>
 nmap tm :tabmove<Space>
-nmap te :tabedit<Space>
+nmap te :tabedit<CR><C-p>
 nmap <leader>t :!pytest -vs<CR>
 nmap <leader>T :!pytest -vs %<CR>
+
+" Split window
+nmap ss :split<Return><C-w>w
+nmap sv :vsplit<Return><C-w>w
+
 
 let g:go_version_warning = 0
 let g:neocomplete#enable_at_startup = 0
@@ -138,6 +140,7 @@ syntax on
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <Leader>a :cclose<CR>:lclose<CR>
+
 autocmd FileType go nmap <Leader>b  <Plug>(go-build)
 autocmd FileType go nmap <Leader>r  <Plug>(go-run)
 autocmd FileType go nmap <Leader>t  <Plug>(go-test)
@@ -162,16 +165,15 @@ let g:go_info_mode = 'guru'
 let g:ale_fixers = {'python': [ 'yapf', 'autopep8','black', 'isort']}
 let g:ale_linters = {'python': ['pyls']}
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 0
+let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 0
 let g:ale_sign_column_always = 1
-" let g:ale_set_loclist = 1
-" let g:ale_set_quickfix = 0
 let g:ale_python_auto_pipenv = 1
 let g:ale_python_pylint_auto_pipenv = 1
 let g:ale_python_pycodestyle_auto_pipenv = 1
 let g:ale_completion_max_suggestions = 20
 let g:ale_change_sign_column_color = 1
+let g:ale_open_list = 0
 
 """ setup pylint_venv
 " pip install pylint-venv
@@ -208,12 +210,37 @@ nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> <Leader>d :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <Leader>n :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-let g:LanguageClient_selectionUI  = "quickfix"
+let g:LanguageClient_selectionUI  = "location-list"
 
 
 """ Settings deoplete
 let g:deoplete#enable_at_startup = 1 "pip3 install --user pynvim"
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ['around', 'LanguageClient']
 
 """ Settings supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+""" Settings Vimux
+" Run the current file with rspec
+ map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+
+ " Prompt for a command to run
+ map <Leader>vp :VimuxPromptCommand<CR>
+
+ " Run last command executed by VimuxRunCommand
+ map <Leader>vl :VimuxRunLastCommand<CR>
+
+ " Inspect runner pane
+ map <Leader>vi :VimuxInspectRunner<CR>
+
+ " Close vim tmux runner opened by VimuxRunCommand
+ map <Leader>vq :VimuxCloseRunner<CR>
+
+ " Interrupt any command running in the runner pane
+ map <Leader>vx :VimuxInterruptRunner<CR>
+
+ " Zoom the runner pane (use <bind-key> z to restore runner pane)
+ map <Leader>vz :call VimuxZoomRunner()<CR>
+
+let g:VimuxHeight = "30"
