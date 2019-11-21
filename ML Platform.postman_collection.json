@@ -1,0 +1,781 @@
+{
+	"info": {
+		"_postman_id": "ec3c44bd-2140-4937-b3da-ef03d71ecd9c",
+		"name": "ML Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login (Password)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "Cyw9JGY9SOEc55s7XYkmltfyOIWkmu9mRV7sNeUx9HzbDDVqqDz5PZ0CZmrDW8BY"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"vieritolove@gmail.com\", \"password\": \"vi1996\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/jwt/create/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"jwt",
+								"create",
+								""
+							]
+						},
+						"description": "Login with email, password"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Magiclink",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "3ppuYXVQ7vcfLIF8sC7xsfcTZmjNIjWziM0N2vReoo7ejg8rVhmgWLXXa0O6iXob"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"doanngochoang96@gmail.com\", \"redirect_link\": \"http://google.com\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/magic/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"magic",
+								""
+							]
+						},
+						"description": "Login with send magiclink to email"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify token magiclink",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "5GEFDZ9xFTnKDWezxvMD8ge1YrnMy8XNL94aS4MyeMlDa35J402aiXRZfGj9vKHp"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/callback/magic/MzI/5bm-60722c24a27280cfcbd9/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"callback",
+								"magic",
+								"MzI",
+								"5bm-60722c24a27280cfcbd9",
+								""
+							]
+						},
+						"description": "Verify token magiclink sent to email"
+					},
+					"response": []
+				},
+				{
+					"name": "Send token email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "5GEFDZ9xFTnKDWezxvMD8ge1YrnMy8XNL94aS4MyeMlDa35J402aiXRZfGj9vKHp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"doanngochoang96@gmail.com\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/email/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"email",
+								""
+							]
+						},
+						"description": "Send code to email"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "5GEFDZ9xFTnKDWezxvMD8ge1YrnMy8XNL94aS4MyeMlDa35J402aiXRZfGj9vKHp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"token\": \"114060\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/callback/auth/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"callback",
+								"auth",
+								""
+							]
+						},
+						"description": "Verify token sent to email"
+					},
+					"response": []
+				},
+				{
+					"name": "Setup profile User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "5GEFDZ9xFTnKDWezxvMD8ge1YrnMy8XNL94aS4MyeMlDa35J402aiXRZfGj9vKHp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"doanngochoang96@gmail.com\",\n    \"username\": \"hoangdn6\",\n    \"first_name\": \"Doan\",\n    \"last_name\": \"Hoang\",\n    \"password\": \"Ngochoanghy\",\n    \"profile\": {\n        \"title\": \"HoangDoan\",\n        \"dob\": \"1996-01-22\",\n        \"address\": \"Hung Yen\",\n        \"country\": \"VN\",\n        \"zip\": \"01234\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/bb143226-09dd-42c7-a1e1-d13b26d5af8b/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"bb143226-09dd-42c7-a1e1-d13b26d5af8b",
+								""
+							]
+						},
+						"description": "Set up username, lastname, firstname, password, profile ,..."
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "5GEFDZ9xFTnKDWezxvMD8ge1YrnMy8XNL94aS4MyeMlDa35J402aiXRZfGj9vKHp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"doanngochoang96@gmail.com\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/password/reset/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"password",
+								"reset",
+								""
+							]
+						},
+						"description": "Send token reset oassword to email"
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "5GEFDZ9xFTnKDWezxvMD8ge1YrnMy8XNL94aS4MyeMlDa35J402aiXRZfGj9vKHp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"uid\": \"MzI\", \"token\": \"5bm-6848473feb65bedb8458\", \"new_password\": \"Ngochoang96\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/password/reset/confirm/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"password",
+								"reset",
+								"confirm",
+								""
+							]
+						},
+						"description": "Confirm reset password"
+					},
+					"response": []
+				}
+			],
+			"description": "API user",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Organization",
+			"item": [
+				{
+					"name": "Create Organization",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "ZjM84bcJclpjIJCYpX34CrhYFwezAeFaFMcDjgPKLencfQt8WsjBM8UWWLaWxQpM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"My Organization\", \"email\": \"doanngochoang96@gmail.com\", \"phone\": \"0359086386\", \"street_address\": \"Ha Noi\", \"locality\": \"string\", \"region\": \"Vietnam\", \"postal_code\": \"12345\", \"country\": \"VN\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/organization/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"organization",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Organization of User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "ZjM84bcJclpjIJCYpX34CrhYFwezAeFaFMcDjgPKLencfQt8WsjBM8UWWLaWxQpM"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/organization/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"organization",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite User to Organization",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "ZjM84bcJclpjIJCYpX34CrhYFwezAeFaFMcDjgPKLencfQt8WsjBM8UWWLaWxQpM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"doanngochoanghy@gmail.com\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/organization/6c470dbb-78cf-4398-8a3b-5b48207451ea/invite_email/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"organization",
+								"6c470dbb-78cf-4398-8a3b-5b48207451ea",
+								"invite_email",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update all field organization",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "ZjM84bcJclpjIJCYpX34CrhYFwezAeFaFMcDjgPKLencfQt8WsjBM8UWWLaWxQpM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ney Name Organization\",\n    \"email\": \"doanngochoang96@gmail.com\",\n    \"phone\": \"035086386\",\n    \"street_address\": \"Kim Giang\",\n    \"locality\": \"Ha Noi\",\n    \"region\": \"What ever\",\n    \"postal_code\": \"12345\",\n    \"country\": \"CN\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/organization/00b5f7d1-2892-440a-b866-62ecbdb38e1c/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"organization",
+								"00b5f7d1-2892-440a-b866-62ecbdb38e1c",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get detail Organization",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/organization/00b5f7d1-2892-440a-b866-62ecbdb38e1c/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"organization",
+								"00b5f7d1-2892-440a-b866-62ecbdb38e1c",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API for organization",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Team",
+			"item": [],
+			"description": "API for team",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get List Notebook",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "vi-VN,vi;q=0.9,en-GB;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/77.0.3865.90 Chrome/77.0.3865.90 Safari/537.36"
+					},
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Referer",
+						"value": "http://127.0.0.1:8000/swagger/?next=/swagger/"
+					},
+					{
+						"key": "Cookie",
+						"value": "csrftoken=qLyJ3wHOtLzHei4Xt4TAz1tAZ9fJVoLbPWHTSrzNdObqePro48fTrwS2hCHV6FkN; sessionid=bn2t34d6nfd16opjur5i4urcavllwaz2"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "ZHZxy9F3S7m2nSZfOwbPrTKDv5liD1sAoS8Hn4x2CaYLnpmGpAx8jo95NyNuOi1c"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/compute/kernel/2f9c924e-7013-4256-b20c-262ff4ab0742/list_notebooks/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"compute",
+						"kernel",
+						"2f9c924e-7013-4256-b20c-262ff4ab0742",
+						"list_notebooks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Push Kernel Kaggle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Origin",
+						"value": "http://127.0.0.1:8000"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "vi-VN,vi;q=0.9,en-GB;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/77.0.3865.90 Chrome/77.0.3865.90 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Referer",
+						"value": "http://127.0.0.1:8000/swagger/?next=/swagger/"
+					},
+					{
+						"key": "Cookie",
+						"value": "csrftoken=qLyJ3wHOtLzHei4Xt4TAz1tAZ9fJVoLbPWHTSrzNdObqePro48fTrwS2hCHV6FkN; sessionid=bn2t34d6nfd16opjur5i4urcavllwaz2"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "ZHZxy9F3S7m2nSZfOwbPrTKDv5liD1sAoS8Hn4x2CaYLnpmGpAx8jo95NyNuOi1c"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"is_private\": true,\n    \"enable_gpu\": false,\n    \"enable_internet\": true,\n    \"notebook\": \"{\\\"cells\\\": [{\\\"metadata\\\": {\\\"_uuid\\\": \\\"8f2839f25d086af736a60e9eeb907d3b93b6e0e5\\\", \\\"_cell_guid\\\": \\\"b1076dfc-b9ad-4769-8c92-a6c4dae69d19\\\", \\\"trusted\\\": true}, \\\"cell_type\\\": \\\"code\\\", \\\"source\\\": \\\"print(\\\\\\\"Hello Kaggle\\\\\\\")\\\", \\\"execution_count\\\": null, \\\"outputs\\\": []}, {\\\"metadata\\\": {\\\"_uuid\\\": \\\"d629ff2d2480ee46fbb7e2d37f6b5fab8052498a\\\", \\\"_cell_guid\\\": \\\"79c7e3d0-c299-4dcb-8224-4455121ee9b0\\\", \\\"trusted\\\": true}, \\\"cell_type\\\": \\\"code\\\", \\\"source\\\": \\\"import requests\\\\n\\\", \\\"execution_count\\\": null, \\\"outputs\\\": []}, {\\\"metadata\\\": {\\\"trusted\\\": true}, \\\"cell_type\\\": \\\"code\\\", \\\"source\\\": \\\"res = requests.get(\\\\\\\"https://facebook.com\\\\\\\")\\\", \\\"execution_count\\\": null, \\\"outputs\\\": []}, {\\\"metadata\\\": {\\\"trusted\\\": true}, \\\"cell_type\\\": \\\"code\\\", \\\"source\\\": \\\"res\\\\n\\\", \\\"execution_count\\\": null, \\\"outputs\\\": []}, {\\\"metadata\\\": {\\\"trusted\\\": true}, \\\"cell_type\\\": \\\"code\\\", \\\"source\\\": \\\"\\\", \\\"execution_count\\\": null, \\\"outputs\\\": []}], \\\"metadata\\\": {\\\"kernelspec\\\": {\\\"language\\\": \\\"python\\\", \\\"display_name\\\": \\\"Python 3\\\", \\\"name\\\": \\\"python3\\\"}, \\\"language_info\\\": {\\\"pygments_lexer\\\": \\\"ipython3\\\", \\\"nbconvert_exporter\\\": \\\"python\\\", \\\"version\\\": \\\"3.6.4\\\", \\\"file_extension\\\": \\\".py\\\", \\\"codemirror_mode\\\": {\\\"name\\\": \\\"ipython\\\", \\\"version\\\": 3}, \\\"name\\\": \\\"python\\\", \\\"mimetype\\\": \\\"text/x-python\\\"}}, \\\"nbformat\\\": 4, \\\"nbformat_minor\\\": 1}\",\n    \"rerun\": true\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/compute/kernel/2f9c924e-7013-4256-b20c-262ff4ab0742/push_kernel_and_run/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"compute",
+						"kernel",
+						"2f9c924e-7013-4256-b20c-262ff4ab0742",
+						"push_kernel_and_run",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
