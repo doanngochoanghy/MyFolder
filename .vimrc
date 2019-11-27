@@ -43,10 +43,14 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/molokai'
 Plugin 'itchyny/lightline.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'auto-pairs'
 Plugin 'dense-analysis/ale'
@@ -78,7 +82,7 @@ set path +=**
 
 "lightline setup
 set laststatus=2
-let NERDTreeWinSize = 22
+let NERDTreeWinSize = 25
 
 "save,edit and quit file
 nmap <leader>q :q<CR>
@@ -164,8 +168,10 @@ let g:go_info_mode = 'guru'
 
 let g:ale_fixers = {'python': [ 'yapf', 'autopep8','black', 'isort']}
 let g:ale_linters = {'python': ['pyls']}
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 0
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
+let g:ale_linters_explicit = 0
 let g:ale_completion_enabled = 0
 let g:ale_sign_column_always = 1
 let g:ale_python_auto_pipenv = 1
@@ -203,7 +209,7 @@ set complete-=i
 " set hidden
 
 let g:LanguageClient_serverCommands = {'python' : ['pyls']}
-source /home/ngochoang/.vim/bundle/LanguageClient-neovim/plugin/LanguageClient.vim
+source ~/.vim/bundle/LanguageClient-neovim/plugin/LanguageClient.vim
 set rtp+=~/.vim/bundle/LanguageClient-neovim
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -213,10 +219,11 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 let g:LanguageClient_selectionUI  = "location-list"
 
 
+
 """ Settings deoplete
 let g:deoplete#enable_at_startup = 1 "pip3 install --user pynvim"
 let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['around', 'LanguageClient']
+let g:deoplete#ignore_sources._ = ['around','buffer', 'LanguageClient']
 
 """ Settings supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -244,3 +251,21 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
  map <Leader>vz :call VimuxZoomRunner()<CR>
 
 let g:VimuxHeight = "30"
+let g:NERDTreeShowIgnoredStatus = 0
+
+
+
+" returns true iff is NERDTree open/active
+function! s:isNTOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
+function! s:syncTree()
+  if &modifiable && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+autocmd BufEnter * call s:syncTree()
