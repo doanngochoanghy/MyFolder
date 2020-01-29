@@ -12,7 +12,6 @@ map <c-h> <c-w>h
 map gst :Gstatus<CR>
 map gd :Gvdiffsplit<CR>
 map gw :Gwrite<CR>
-map gcm :Gcommit<CR>
 map gp :Gpush<CR>
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
@@ -39,6 +38,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/molokai'
@@ -60,6 +60,8 @@ Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
+Plugin 'fatih/vim-go'
+" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
@@ -76,6 +78,7 @@ set wildmenu showcmd showmatch
 set incsearch
 set background=light
 set t_Co=256
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "recursive fuzzy find
 set path +=**
@@ -116,12 +119,13 @@ nmap sv :vsplit<Return><C-w>w
 
 
 let g:go_version_warning = 0
-let g:neocomplete#enable_at_startup = 0
 syntax enable  
 let g:go_disable_autoinstall = 0
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
 
-" Highlight
+" Golang setting
+" install gopls 
+" GO111MODULE=on go get golang.org/x/tools/gopls@latest
 let g:go_highlight_functions = 1  
 let g:go_highlight_methods = 1  
 let g:go_highlight_structs = 1  
@@ -131,6 +135,9 @@ let g:go_highlight_fields = 1
 let g:go_highlight_build_constraints = 1 
 let g:go_highlight_function_calls = 1
 let g:go_textobj_include_function_doc = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
 
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -160,14 +167,10 @@ let g:go_info_mode = 'guru'
 " let g:go_metalinter_autosave = 1
 " let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
  let g:acp_enableAtStartup = 0
- " Use neocomplete.
- let g:neocomplete#enable_at_startup = 1
- " Use smartcase.
- let g:neocomplete#enable_smart_case = 1
  set completeopt-=preview
 
-let g:ale_fixers = {'python': [ 'yapf', 'autopep8','black', 'isort']}
-let g:ale_linters = {'python': ['pyls']}
+let g:ale_fixers = {'python': [ 'yapf', 'autopep8','black', 'isort', 'remove_trailing_lines', 'trim_whitespace', 'add_blank_lines_for_python_control_statements']}
+let g:ale_linters = {'python': ['pyls'], 'go': ['gopls', 'gofmt']}
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_insert_leave = 0
 let g:ale_fix_on_save = 1
@@ -198,17 +201,15 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-autocmd FileType python nnoremap <Leader>= :Autoformat<CR>:w<CR>
+" autocmd FileType python nnoremap <Leader>= :Autoformat<CR>:w<CR>
 let g:autoformat_autoindent = 1
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = 'env\|htmlcov'
 set complete-=i
 
 """Settings LanguageClientServer
 """ sudo pip install python-language-server
 " set hidden
 
-let g:LanguageClient_serverCommands = {'python' : ['pyls']}
+let g:LanguageClient_serverCommands = {'python' : ['pyls'], 'go':['gopls']}
 source ~/.vim/bundle/LanguageClient-neovim/plugin/LanguageClient.vim
 set rtp+=~/.vim/bundle/LanguageClient-neovim
 let g:LanguageClient_autoStart = 1
@@ -223,7 +224,7 @@ let g:LanguageClient_selectionUI  = "location-list"
 """ Settings deoplete
 let g:deoplete#enable_at_startup = 1 "pip3 install --user pynvim"
 let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['around','buffer', 'LanguageClient']
+let g:deoplete#ignore_sources._ = ["around","LanguageClient", "buffer"]
 
 """ Settings supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -252,20 +253,13 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 let g:VimuxHeight = "30"
 let g:NERDTreeShowIgnoredStatus = 0
+let g:ctrlp_show_hidden = 1
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.env/*,*.swp,*.swo       " Linux/MacOSX
+let g:NERDTreeRespectWildIgnore = 1
+set updatetime=100
 
 
 
-" returns true iff is NERDTree open/active
-function! s:isNTOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
 
-" calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
-function! s:syncTree()
-  if &modifiable && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-autocmd BufEnter * call s:syncTree()
+" Cocnvim settings
+nmap <leader>rn <Plug>(coc-rename)

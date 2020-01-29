@@ -13,13 +13,13 @@ CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_OSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -28,7 +28,7 @@ CASE_SENSITIVE="true"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -59,7 +59,6 @@ completions=(
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
   general
-  example
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -99,19 +98,33 @@ source $OSH/oh-my-bash.sh
 #
 # Example aliases
 alias bashconfig="vim ~/.bashrc"
-alias ohmybash="vim ~/.oh-my-bash"
 alias vimconfig="vim ~/.vimrc"
+alias ohmybash="vim ~/.oh-my-bash"
 alias tmuxconfig="vim ~/.tmux.conf"
+alias sshconfig="vim ~/.ssh/config"
 
+no_proxy=localhost,visc.com,viettel.com,viettel.com.vn,sirc.com,gitlab.visc.com
 
-alias myfolder="cd ~/MyFolder"
-alias datn="cd ~/datn"
-alias ml="cd ~/Document/ml_platform_extended && activate"
-alias jn="nohup jupyter notebook &"
-alias python="/usr/bin/python3"
-alias activate="source .*/bin/activate"
+force_color_prompt=yes
+alias ls='ls --color=always -G'
+alias 0='cd'
+alias myfolder='cd ~/Document/MyFolder'
+alias projects='cd ~/Documents/Projects'
+alias zoo='cd ~/Documents/Projects/app-zoo'
+alias ml='cd ~/Documents/Projects/ml_platform_extended'
+alias jn='nohup jupyter notebook &'
+alias active='source .*/bin/activate'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 export TERM=xterm-256color
+export GOPATH=$HOME/Documents/Projects/go
+export GOBIN=$HOME/Documents/Projects/go/bin
+export PATH+=:$GOBIN
+
+alias streamdb='cd $GOPATH/src/gitlab.visc.com/interactive-machine-learning-mvp/streamdb-management'
+
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
