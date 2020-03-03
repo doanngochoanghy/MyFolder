@@ -1,0 +1,7 @@
+{
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.jediEnabled": true,
+  "python.formatting.provider":"black",
+  "python.autoComplete.addBrackets": true 
+}
