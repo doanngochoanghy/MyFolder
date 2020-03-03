@@ -38,30 +38,23 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'auto-pairs'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'benmills/vimux'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'fatih/molokai'
 Plugin 'itchyny/lightline.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
-Plugin 'auto-pairs'
-Plugin 'dense-analysis/ale'
-Plugin 'autozimu/LanguageClient-neovim'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
-Plugin 'fatih/vim-go'
-" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
@@ -85,7 +78,7 @@ set path +=**
 
 "lightline setup
 set laststatus=2
-let NERDTreeWinSize = 25
+let NERDTreeWinSize = 20
 
 "save,edit and quit file
 nmap <leader>q :q<CR>
@@ -118,27 +111,6 @@ nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
 
 
-let g:go_version_warning = 0
-syntax enable  
-let g:go_disable_autoinstall = 0
-let g:jedi#completions_enabled = 1
-
-" Golang setting
-" install gopls 
-" GO111MODULE=on go get golang.org/x/tools/gopls@latest
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_build_constraints = 1 
-let g:go_highlight_function_calls = 1
-let g:go_textobj_include_function_doc = 1
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-
-
 let g:molokai_original = 1
 let g:rehash256 = 1
 colorscheme molokai
@@ -147,84 +119,10 @@ set rtp+=$GOROOT/misc/vim
 filetype plugin indent on
 syntax on
 
-" vim-go improvements
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <Leader>a :cclose<CR>:lclose<CR>
-
-autocmd FileType go nmap <Leader>b  <Plug>(go-build)
-autocmd FileType go nmap <Leader>r  <Plug>(go-run)
-autocmd FileType go nmap <Leader>t  <Plug>(go-test)
-autocmd FileType go nmap <Leader>c	<Plug>(go-coverage-toggle)
-autocmd FileType go nmap <Leader>i <Plug>(go-info)
-let g:go_list_type = "quickfix"
-let g:go_test_timeout = '10s'
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-" let g:go_fmt_command = "goimports"
-let g:go_info_mode = 'guru' 
-" let g:go_updatetime = 100
-
-" let g:go_metalinter_autosave = 1
-" let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
- let g:acp_enableAtStartup = 0
- set completeopt-=preview
-
-let g:ale_fixers = {'python': [ 'yapf', 'autopep8','black', 'isort', 'remove_trailing_lines', 'trim_whitespace', 'add_blank_lines_for_python_control_statements']}
-let g:ale_linters = {'python': ['pyls'], 'go': ['gopls', 'gofmt']}
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 0
-let g:ale_completion_enabled = 0
-let g:ale_sign_column_always = 1
-let g:ale_python_auto_pipenv = 1
-let g:ale_python_pylint_auto_pipenv = 1
-let g:ale_python_pycodestyle_auto_pipenv = 1
-let g:ale_completion_max_suggestions = 20
-let g:ale_change_sign_column_color = 1
-let g:ale_open_list = 0
-
-""" setup pylint_venv
-" pip install pylint-venv
-" Create file ~/.pylintrc
-" init-hook="
-"     from pylint_venv import inithook
-"     inithook()"
-" 
-" 
-
-
 set statusline+=%#warningmsg#
 set statusline+=%*
+set statusline^=%{coc#status()}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" autocmd FileType python nnoremap <Leader>= :Autoformat<CR>:w<CR>
-let g:autoformat_autoindent = 1
-set complete-=i
-
-"""Settings LanguageClientServer
-""" sudo pip install python-language-server
-" set hidden
-
-let g:LanguageClient_serverCommands = {'python' : ['pyls'], 'go':['gopls']}
-source ~/.vim/bundle/LanguageClient-neovim/plugin/LanguageClient.vim
-set rtp+=~/.vim/bundle/LanguageClient-neovim
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> <Leader>d :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <Leader>n :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-let g:LanguageClient_selectionUI  = "location-list"
-
-
-
-""" Settings deoplete
-let g:deoplete#enable_at_startup = 1 "pip3 install --user pynvim"
-let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ["around","LanguageClient", "buffer"]
 
 """ Settings supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -254,12 +152,13 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:VimuxHeight = "30"
 let g:NERDTreeShowIgnoredStatus = 0
 let g:ctrlp_show_hidden = 1
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.env/*,*.swp,*.swo       " Linux/MacOSX
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.env/*,*.sw*       " Linux/MacOSX
 let g:NERDTreeRespectWildIgnore = 1
 set updatetime=100
 
-
-
-
 " Cocnvim settings
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>r <Plug>(coc-rename)
+nmap <leader>d <Plug>(coc-definition)
+nmap <leader>i :call CocAction("runCommand", "python.sortImports")<CR> 
+nmap <leader>r <Plug>(coc-references)
+nmap <leader>m <Plug>(coc-diagnostic-next)
