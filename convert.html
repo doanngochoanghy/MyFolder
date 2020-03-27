@@ -15,7 +15,6 @@ function myFunction() {
         input = input.split(keyword.in).join(keyword.out)
     }
     document.getElementById("lname").value = input
-    document.getElementById("copyButton").focus()
 }
 function Copy() {
   /* Get the text field */
@@ -28,16 +27,28 @@ function Copy() {
   /* Copy the text inside the text field */
   document.execCommand("copy");
 }
+function onTestChange() {
+    var key = window.event.keyCode;
+
+    // If the user has pressed enter
+    if (key === 13) {
+        //document.getElementById("txtArea").value = document.getElementById("txtArea").value + "\n*";
+		document.getElementById("copyButton").focus()
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 </script>
 <body>
- <form >
-  <label for="fname">Input:</label>
-  <textarea type="text" id="fname" name="fname" rows="20" cols="200" ></textarea><br><br>
-  <input type="button" value="Convert" onClick="return myFunction()"><br><br>
+ <div margin="auto" display="block">
+  <label for="fname ">Input:</label>
+  <textarea type="text" id="fname" name="fname" rows="20" cols="200" onkeypress="onTestChange()"; onInput="myFunction();"></textarea><br><br>
+  <input type="button" value="Convert" margin="auto"  display="block" onClick="return myFunction()"><input type="button" value="Copy" onClick="Copy()" id="copyButton"><br><br>
   <label for="lname">Output:</label>
   <textarea type="text" id="lname" name="lname" rows="20" cols="200" ></textarea><br><br>
-  <input type="button" value="Copy" onClick="Copy()" id="copyButton"><br><br>
-</form>
+</div>
 </body>
 
 </html>
