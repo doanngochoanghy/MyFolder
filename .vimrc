@@ -162,3 +162,4 @@ nmap <leader>d <Plug>(coc-definition)
 nmap <leader>i :call CocAction("runCommand", "python.sortImports")<CR> 
 nmap <leader>r <Plug>(coc-references)
 nmap <leader>m <Plug>(coc-diagnostic-next)
+  
